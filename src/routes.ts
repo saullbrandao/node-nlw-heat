@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { AuthenticateUserController } from './controllers/AuthenticateUserController'
 import { CreateMessageController } from './controllers/CreateMessageController'
 import { GetLastThreeMessagesController } from './controllers/GetLastThreeMessagesController'
+import { UserProfileController } from './controllers/UserProfileController'
 import { ensureAuthenticated } from './middleware/ensureAuthenticated'
 
 const router = Router()
@@ -15,5 +16,7 @@ router.post(
 )
 
 router.get('/messages/last3', new GetLastThreeMessagesController().handle)
+
+router.get('/profile', ensureAuthenticated, new UserProfileController().handle)
 
 export { router }
